@@ -1,0 +1,38 @@
+{
+  "artNetIp": "0.0.0.0",
+  "artNetPort": 6454,
+  "mqttHost": "localhost",
+  "mqttPort": 1883,
+  "rules": [
+    {
+      "channels": [
+        1
+      ],
+      "type": "TASMOTA",
+      "properties": {
+        "topic": "cmnd/sep/power",
+        "threshold": 127
+      }
+    },
+    {
+      "channels": [
+        2
+      ],
+      "type": "TASMOTA",
+      "properties": {
+        "topic": "cmnd/jun/power",
+        "threshold": 127
+      }
+    },
+    {
+      "channels": [
+        3
+      ],
+      "type": "TASMOTA",
+      "properties": {
+        "topic": "cmnd/apr/power",
+        "threshold": 127
+      }
+    }
+  ]
+}
