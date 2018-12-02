@@ -41,6 +41,7 @@ public class ArtNet2MqttApp {
         byte[] oldData = new byte[512];
 
         // Rules
+        // TODO: check for Null/empty rules collection
         List<Rule> rules = config.getRules().stream()
                 .map(ruleConfig -> RuleFactory.create(ruleConfig, publisher))
                 .collect(Collectors.toList());
@@ -72,7 +73,8 @@ public class ArtNet2MqttApp {
     }
 
     private static Config getConfig() {
-        return Config.fromFile("src/config/config.json");
+        // TODO: search in multiple locations (deployed path != path IntelliJ uses)
+        return Config.fromFile("config.json");
     }
 
 }

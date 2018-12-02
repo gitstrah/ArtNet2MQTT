@@ -16,7 +16,7 @@ public class TasmotaRule extends Rule {
     private static final String VALUE_OFF = "0";
     private static final String VALUE_ON = "1";
 private static final String PROPERTY_TOPIC = "topic";
-private static final String PROPERTY_TRESHOLD = "treshold";
+private static final String PROPERTY_TRESHOLD = "threshold";
 
     private String lastValue = null;
 
@@ -36,14 +36,14 @@ private static final String PROPERTY_TRESHOLD = "treshold";
                 if (config.getChannels().contains(dmxChange.getChannel())) {
                     try {
                         String topic = config.getString(PROPERTY_TOPIC);
-                        String value = dmxChange.getValue() >= config.getInteger(PROPERTY_TRESHOLD) ? VALUE_ON : VALUE_OFF;
+                        String value = dmxChange.getValue() > config.getInteger(PROPERTY_TRESHOLD) ? VALUE_ON : VALUE_OFF;
                         if(!value.equals(lastValue)) {
                             MqttMessage msg = new MqttMessage(value.getBytes());
                             msg.setQos(0);
                             msg.setRetained(true);
                             client.publish(topic, msg);
                             lastValue = value;
-                            LOGGER.info(String.format("%s - %s", topic, value));
+                            LOGGER.info(String.format("%s : %s", topic, value));
                         }
                     } catch (MqttException e) {
                         e.printStackTrace();
